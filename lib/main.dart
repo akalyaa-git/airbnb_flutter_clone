@@ -1,13 +1,30 @@
-import 'package:airbnb_flutter_clone/airbnb_clone/notifier/authentication_provider.dart';
-import 'package:airbnb_flutter_clone/airbnb_clone/notifier/property_provider.dart';
-import 'package:airbnb_flutter_clone/airbnb_clone/presentation/splash_screen.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/core/app_routes.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/core/app_theme.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/features/notifier/authentication_provider.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/features/notifier/property_provider.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/features/notifier/wishlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: "",
+        measurementId: "",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(MyApp());
 }
 
@@ -20,16 +37,14 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (_) => PropertyProvider()),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
       ],
       child: MaterialApp(
+        theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        title: 'Airbnb Clone',
-        theme: ThemeData(primarySwatch: Colors.red),
-
-        /// Listens to Firebase authentication state changes.
-        home: SplashScreen(),
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: AppRoutes.generateRoute,
       ),
     );
   }
 }
-

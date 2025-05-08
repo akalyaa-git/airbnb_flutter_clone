@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:airbnb_flutter_clone/airbnb_clone/core/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'auth_screen.dart';
 
@@ -19,10 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(Duration(seconds: 2)); // Show splash for 2 seconds
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => AuthScreen()),
-    );
+    Navigator.pushReplacementNamed(context, AppRoutes.auth);
   }
 
   @override

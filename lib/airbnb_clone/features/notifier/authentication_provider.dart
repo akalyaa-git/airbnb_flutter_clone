@@ -1,4 +1,4 @@
-import 'package:airbnb_flutter_clone/airbnb_clone/presentation/home_screen.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/core/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,10 +18,8 @@ class AuthenticationProvider extends ChangeNotifier {
 
       await Future.delayed(Duration(seconds: 3));
       // Navigate to HomeScreen on success
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         debugPrint('The password provided is too weak.');
@@ -49,10 +47,8 @@ class AuthenticationProvider extends ChangeNotifier {
 
       await Future.delayed(Duration(seconds: 3));
       // Navigate to HomeScreen on success
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');

@@ -65,7 +65,7 @@
 //     );
 //   }
 // }
-import 'package:airbnb_flutter_clone/airbnb_clone/notifier/authentication_provider.dart';
+import 'package:airbnb_flutter_clone/airbnb_clone/features/notifier/authentication_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
