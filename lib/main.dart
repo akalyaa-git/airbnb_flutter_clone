@@ -11,6 +11,10 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
+    // To get these values,
+    // 1. Go to firebase console and go to the particular project
+    // 2. Left side panel -> Settings -> General -> Scroll down, select the web app
+    // 3. Select the Config, there you can find these props
     await Firebase.initializeApp(
       options: FirebaseOptions(
         apiKey: "",
